@@ -1,23 +1,23 @@
 package online_tusur.unit_online_tusur;
 
  class Student {
-//РїРѕР»СЏ РєР»Р°СЃСЃР°
+//поля класса
 	private String firstName;
 	private String lastName;
 	private int age;
 
-//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ Р°СЂРіСѓРјРµРЅС‚Р°РјРё
+//конструктор с аргументами
 	public Student(String firstName, String lastName, int age) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setAge(age);
 	}
 
-//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+//конструктор по умолчанию
 	public Student() {
 	}
 
-//РіРµС‚С‚РµСЂС‹ Рё СЃРµС‚С‚РµСЂС‹
+//геттеры и сеттеры
 	public String getFirstName() {
 		return firstName;
 	}
@@ -28,7 +28,7 @@ package online_tusur.unit_online_tusur;
 		} else {
 			this.firstName = firstName.toUpperCase();
 			}
-		
+	
 		 	}
 
 	public String getLastName() {
@@ -55,7 +55,7 @@ package online_tusur.unit_online_tusur;
 		return getLastName() + " " + getFirstName();
 	}
 
-//РјРµС‚РѕРґ РґР»СЏ СЂР°СЃС‡РµС‚Р° СЃСЂРµРґРЅРµРіРѕ РІРѕР·СЂР°СЃС‚Р°
+//метод для расчета среднего возраста
     public static int avgAge(Student [] array) {
 		int avg = 0;
 		int ageSum=0;
@@ -68,10 +68,10 @@ package online_tusur.unit_online_tusur;
 		return avg;
 	}
 	
-//РјРµС‚РѕРґ РґР»СЏ СЂР°СЃС‡РµС‚Р° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РІРѕР·СЂР°СЃС‚Р°
+//метод для расчета минимального возраста
 public static int minAge(Student [] array) {
 
-	int min=100;		// С‚РµРєСѓС‰РёР№ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РІРѕР·СЂР°СЃС‚ 
+	int min=100;		// текущий минимальный возраст 
 	
 	for (int i=0; i < array.length; i++){
 			if (array[i].getAge() < min) { 
@@ -82,10 +82,10 @@ public static int minAge(Student [] array) {
 		return min;
 		}
 		
-//РјРµС‚РѕРґ РґР»СЏ СЂР°СЃС‡РµС‚Р° РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ РІРѕР·СЂР°СЃС‚Р°
+//метод для расчета максимального возраста
 public static int maxAge(Student [] array) {
 
-int max=0; // С‚РµРєСѓС‰РёР№ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РІРѕР·СЂР°СЃС‚
+int max=0; // текущий максимальный возраст
 
 for (int i=0; i < array.length; i++){
 if (array[i].getAge() > max) {
