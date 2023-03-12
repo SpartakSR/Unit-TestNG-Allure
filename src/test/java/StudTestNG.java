@@ -1,13 +1,9 @@
 package online_tusur.unit_online_tusur;
 
-import static org.testng.Assert.*;
 
-import java.util.*;
+import static org.testng.AssertJUnit.assertEquals;
 
-import org.testng.AssertJUnit;
 import org.testng.annotations.*;
-import org.testng.annotations.Optional;
-import org.testng.TestNGException;
 
 
 
@@ -28,92 +24,81 @@ public class StudTestNG {
 	}
 
 /*==============================================================================================================*/	
-	/* Тест для геттера getLastName()*/
+/* Параметризированный тест для геттера getLastName()*/
 	
-	@DataProvider(name="data2", parallel = true)
+	@DataProvider(name="data1", parallel = true)
 	public static Object[][] LastNameData() {
-		return new Object[][] {{"ivanov","Ivanov"},{"PETROV","Petrov"}};
+		return new Object[][] {{"iVaNoV","Ivanov"},{"PeTrOv","Petrov"},{"k", "K"},{"P","P"}};
 	}
-	@Test(dataProvider="data2",threadPoolSize = 2)
+	@Test(dataProvider="data1",threadPoolSize = 2)
       public void test1(String lastName, String expLN) {
 		s.setLastName(lastName);
 		assertEquals(expLN, s.getLastName());
-		long id = Thread.currentThread().getId();
-		System.out.println("Param test-metod. Thread id is: "+id);
   }
 	
-/*==========================================================================================================*/		
+/*--------------------------------------------------------------------------------------------------------------*/		
+/* Параметризированный тест для геттера getFirstName()*/
 	
-/* Тест для геттера getAge()*/	
+	@DataProvider(name="data2", parallel = true)
+	public static Object[][] FirstNameData() {
+		return new Object[][] {{"damir","Damir"},{"TIMUR","Timur"},{"d", "D"},{"T","T"}};
+	}
+	@Test(dataProvider="data2",threadPoolSize = 2)
+      public void test2(String firstName, String expFN) {
+		s.setFirstName(firstName);
+		assertEquals(expFN, s.getFirstName());
+  }
+/*--------------------------------------------------------------------------------------------------------------*/		
+/* Параметризированный тест для геттера getAge()*/	
 	
 	@DataProvider(name="data3", parallel = true)
 	public static Object[][] AgeData() {
-		return new Object[][] {{17,18},{50,50}};
+		return new Object[][] {{17,18},{18,18},{50,50},{51,18}};
 	}
 	@Test(dataProvider="data3",threadPoolSize = 2)
-      public void test2(int age, int expAge) {
+      public void test3(int age, int expAge) {
 		s.setAge(age);
 		assertEquals(expAge, s.getAge());
-		long id = Thread.currentThread().getId();
-		System.out.println("Param test-metod. Thread id is: "+id);
-  }
-
-/*===========================================================================================================*/		
-/* Тест расчета среднего возраста студентов */
-	
-	@DataProvider(name="data1", parallel = true)
-	public static Student[] AVGAge1() {
-		return new Student[] {new Student("Alexandr", "Ivanov", 17), new Student("Vladimir", "Petrov", 18),
-				              new Student("Aleksey", "Alekseev", 50), new Student("kONStantin","petrov", 51)};
-	}
-	@Test(dataProvider="data1",threadPoolSize = 4)
-      public void test3(Student[] medavg) {
-		assertEquals(Student.avgAge(medavg), 34);
-		long id = Thread.currentThread().getId();
-		System.out.println("Param test-metod. Thread id is: "+id);
-	}
-	
-/*============================================================================================================*/		
-	/* Вывод регистарционных данных */
-	
-	@DataProvider(name="data4", parallel = true)
-	public static Object[] AVGAge2() {
-		return new Object[][] {
-				{"alexandr", "ivanov", 17},
-				{"Vladimir", "Petrov", 25},
-				{"Aleksey", "Alekseev", 50},
-				{"kONStantin","petrov", 51}
-		};		
-		}
-	@Test(dataProvider="data4",threadPoolSize = 4)
-      public void test4(String firstName, String lastName, int age) {
-		s.setLastName(lastName);
-		s.setFirstName(firstName);
-		s.setAge(age);
-		
-		System.out.println("Registered student with details: "+s.getFullName()+" "+s.getAge());
-		long id = Thread.currentThread().getId();
-		System.out.println("Param test-metod. Thread id is: "+id);
-	}
-		
-/*==============================================================================================================*/
-	@Test
-	@Parameters({"age"})
-      public void test5(@Optional ("0") int age) {
-	 	s.setAge(age);
-		AssertJUnit.assertEquals(50, s.getAge());
-		long id = Thread.currentThread().getId();
-		System.out.println("Param test-metod. Thread id is: "+id);
   }
 
 /*==============================================================================================================*/	
-	@Test
-	  public void test6() {
-		int age = 17;
-		int expAge = 18;
-		assertEquals(expAge, s.getAge());
-		long id = Thread.currentThread().getId();
-		System.out.println("Sample test-metod. Thread id is: "+id);
-	  }
-	
+/* Проверка метода расчета среднего возраста студентов */
+	 @Test
+	 public void test_AVG() {
+	    Student[] students2 = {
+	    		new Student("ivan", "sidorov", 20),
+	    		new Student("IVAN", "NIKULIN", 18),
+				new Student("kONSTANTIN","pETROV", 40),
+				new Student("Mihail","Petrov", 30)};
+	 	assertEquals(27, Student.avgAge(students2));	
+	 }
+	 
+/* Проверка метода расчета максимального возраста студентов */
+	  @Test
+	  void test_MAX() {
+	    Student[] students2 = {
+	    		new Student("ivan", "sidorov", 17),
+	    		new Student("IVAN", "NIKULIN", 18),
+				new Student("kONSTANTIN","pETROV", 49),
+				new Student("Mihail","Petrov", 40)};
+	 	assertEquals(49, Student.maxAge(students2));	
+	 }
+/* Проверка метода расчета минимального возраста студентов */
+	  @Test
+	  void test_MIN() {
+	    Student[] students2 = {
+	    		new Student("ivan", "sidorov", 20),
+	    		new Student("IVAN", "NIKULIN", 18),
+				new Student("kONSTANTIN","pETROV", 40),
+				new Student("Mihail","Petrov", 45)};
+	 	assertEquals(18, Student.minAge(students2));	
+	 }
+/* Проверка регистра записи фамилии и имени студентов */
+	  @Test
+	  void test_name() {
+	    s.setFirstName("iVaN");
+		s.setLastName("sIdOrOv");
+	 	assertEquals(s.getFullName(),("Sidorov Ivan"));	
+	 }
 }
+
