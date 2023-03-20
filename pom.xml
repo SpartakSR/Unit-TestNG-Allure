@@ -71,8 +71,6 @@
         <configuration>
         <reportVersion>2.18.0</reportVersion>
         <allureDownloadURL>https://github.com/allure-framework/allur2/releases/tag/2.18.0/allure-2.18.0.zip</allureDownloadURL>
-        <reportDirectory>${basedir}/target/allure-report</reportDirectory>
-        <resultsDirectory>${basedir}/target/allure-results</resultsDirectory>
         </configuration>
       </plugin>
    </plugins>
