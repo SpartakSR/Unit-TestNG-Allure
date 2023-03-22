@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>report</groupId>
+  <artifactId>allureTNG</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>allureTNG</name>
+  <properties>
+     <aspectj.version>1.9.9</aspectj.version>
+     <maven.compiler.source>1.8</maven.compiler.source>
+     <maven.compiler.target>1.8</maven.compiler.target>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.18.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-maven</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+  </dependencies>
+  
+  <build>
+   <plugins>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-surefire-plugin</artifactId>
+         <version>3.0.0-M7</version>
+         <configuration>
+            <testFailureIgnore>false</testFailureIgnore>
+            <suiteXmlFiles>
+            <suiteXmlFile>testng.xml</suiteXmlFile>
+            </suiteXmlFiles>
+            <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
+            <systemProperties>
+               <property>
+                  <name>allure.results.directory</name>
+                  <value>${project.build.directory}/allure-results</value>
+               </property>
+            </systemProperties>
+         </configuration>
+         <dependencies>
+            <dependency>
+               <groupId>org.aspectj</groupId>
+               <artifactId>aspectjweaver</artifactId>
+               <version>${aspectj.version}</version>
+            </dependency>
+         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.10.0</version>
+        <configuration>
+        <reportVersion>2.18.0</reportVersion>
+        <allureDownloadURL>https://github.com/allure-framework/allur2/releases/tag/2.18.0/allure-2.18.0.zip</allureDownloadURL>
+        </configuration>
+      </plugin>
+   </plugins>
+</build>
+  
+</project>
