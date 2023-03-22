@@ -3,7 +3,7 @@ package online_tusur.unit_online_tusur;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.*;
 
-/* Динамические тесты с помощью аннотации @Factory */
+/* Р”РёРЅР°РјРёС‡РµСЃРєРёРµ С‚РµСЃС‚С‹ СЃ РїРѕРјРѕС‰СЊСЋ Р°РЅРЅРѕС‚Р°С†РёРё @Factory */
 
 public class StudentTestFactory {
 	@Factory
